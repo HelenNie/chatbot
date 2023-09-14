@@ -25,9 +25,22 @@ from streamlit_chat import message
 from streamlit_extras.colored_header import colored_header
 from streamlit_extras.add_vertical_space import add_vertical_space
 from hugchat import hugchat
+from hugchat.login import Login
 
 
 st.set_page_config(page_title="🔗 Helen's Chatbot")
+
+
+# Log in to huggingface and grant authorization to huggingchat
+email = st.secrets["HC_USERNAME"]
+passwd = st.secrets["HC_PASSWD"]
+sign = Login(email, passwd)
+cookies = sign.login()
+
+# Save cookies to the local directory
+cookie_path_dir = "./cookies_snapshot"
+sign.saveCookiesToDir(cookie_path_dir)
+
 
 input_container = st.container()
 colored_header(label='', description='', color_name='blue-30')
@@ -47,12 +60,12 @@ def get_text():
 
 # Response output
 def generate_response(prompt):
-    chatbot = hugchat.ChatBot()
+    chatbot = hugchat.ChatBot(cookies=cookies.get_dict())
     response = chatbot.chat(prompt)
     return response
 
 with st.sidebar:
-    st.title('🤗💬 ChaiTea the Chatbot')
+    st.title('💬 ChaiTea the Chatbot')
     st.markdown('''
     	Hello!
     ''')
