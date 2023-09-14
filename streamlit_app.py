@@ -21,8 +21,6 @@ import streamlit as st
 #     generate_response(text)
 
 
-# deep learning alternative: BERT + pytorch ?
-
 from streamlit_chat import message
 from streamlit_extras.colored_header import colored_header
 from streamlit_extras.add_vertical_space import add_vertical_space
@@ -42,6 +40,16 @@ if 'generated' not in st.session_state:
 if 'past' not in st.session_state:
     st.session_state['past'] = ['Hi!']
 
+# User input
+def get_text():
+    input_text = st.text_input("You: ", "", key="input")
+    return input_text
+
+# Response output
+def generate_response(prompt):
+    chatbot = hugchat.ChatBot()
+    response = chatbot.chat(prompt)
+    return response
 
 with st.sidebar:
     st.title('🤗💬 ChaiTea the Chatbot')
@@ -66,18 +74,7 @@ with response_container:
             message(st.session_state['past'][i], is_user=True, key=str(i) + '_user')
             message(st.session_state['generated'][i], key=str(i))
 
-
-# User input
-def get_text():
-    input_text = st.text_input("You: ", "", key="input")
-    return input_text
-
-# Response output
-def generate_response(prompt):
-    chatbot = hugchat.ChatBot()
-    response = chatbot.chat(prompt)
-    return response
-
+# deep learning alternative: BERT + pytorch ?
 
 
 
