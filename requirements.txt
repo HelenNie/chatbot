@@ -5,3 +5,6 @@ langchain
 hugchat
 streamlit-chat
 streamlit-extras
+
+torch
+transformers
