@@ -1,28 +1,5 @@
-## 1. OpenAI way
 
-## https://medium.com/streamlit/langchain-tutorial-1-build-an-llm-powered-app-in-18-lines-of-code-384a87016d0a
-
-# import streamlit as st
-# from langchain.llms import OpenAI
-
-# st.set_page_config(page_title="🔗 Helen's Chatbot")
-
-# openai_api_key = st.sidebar.text_input('OpenAI API Key')
-
-# def generate_response(input_text):
-#   llm = OpenAI(temperature=0.7, openai_api_key=openai_api_key)
-#   st.info(llm(input_text))
-
-# with st.form('my_form'):
-#   text = st.text_area('Enter text:', 'What are the three key pieces of advice for learning how to code?')
-#   submitted = st.form_submit_button('Submit')
-#   if not openai_api_key.startswith('sk-'):
-#     st.warning('Please enter your OpenAI API key!', icon='⚠')
-#   if submitted and openai_api_key.startswith('sk-'):
-#     generate_response(text)
-
-
-## 2. Hugchat way
+## 1. Hugchat way
 
 
 import streamlit as st
@@ -77,7 +54,6 @@ with st.sidebar:
     add_vertical_space(5)
     st.write('By Helen Nie')
 
-## Applying the user input box
 with input_container:
     user_input = get_text()
 
@@ -93,7 +69,31 @@ with response_container:
             message(st.session_state['generated'][i], key=str(i))
 
 
-## 3. Transformer Way
+## 2. OpenAI way
+
+## https://medium.com/streamlit/langchain-tutorial-1-build-an-llm-powered-app-in-18-lines-of-code-384a87016d0a
+
+# import streamlit as st
+# from langchain.llms import OpenAI
+
+# st.set_page_config(page_title="🔗 Helen's Chatbot")
+
+# openai_api_key = st.sidebar.text_input('OpenAI API Key')
+
+# def generate_response(input_text):
+#   llm = OpenAI(temperature=0.7, openai_api_key=openai_api_key)
+#   st.info(llm(input_text))
+
+# with st.form('my_form'):
+#   text = st.text_area('Enter text:', 'What are the three key pieces of advice for learning how to code?')
+#   submitted = st.form_submit_button('Submit')
+#   if not openai_api_key.startswith('sk-'):
+#     st.warning('Please enter your OpenAI API key!', icon='⚠')
+#   if submitted and openai_api_key.startswith('sk-'):
+#     generate_response(text)
+
+
+## 3. Transformers Way
 
 ## https://thepythoncode.com/article/conversational-ai-chatbot-with-huggingface-transformers-in-python
 
@@ -126,13 +126,6 @@ with response_container:
 #     print(f"DialoGPT: {output}")
 
 
-# DL: BERT + pytorch/tensorflow + huggingface
-# train / fine-tune own transformer
-
-# figure out what can install locally - transformers?
-# fine-tune on kaggle and download to local?
-
-
 ## requirements backup
 
 # openai
@@ -140,3 +133,12 @@ with response_container:
 
 # torch
 # transformers
+
+
+## Finetuning
+
+# Data = therapy transcripts: https://www.kaggle.com/datasets/elvis23/mental-health-conversational-data
+# Model = GPT2LMHeadModel
+# Framework = pytorch or tensorflow
+# Compute = Kaggle
+# Link = https://www.kaggle.com/helenzn/chaitea-the-chatbot
